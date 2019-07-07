@@ -1,2 +1,6 @@
-# survival-manual-for-front-end
-a series of solutions about web development.
+# how to
+---
+
+### list
+
+* circle progress bar
