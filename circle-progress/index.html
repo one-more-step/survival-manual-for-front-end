@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      text-align: center;
+      padding: 200px;
+    }
+
+    .out-circle {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      border: 1px solid red;
+      overflow: hidden;
+    }
+
+    .inner-circle {
+      z-index: 10;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 480px;
+      height: 480px;
+      text-align: center;
+      line-height: 480px;
+      font-size: 30px;
+      border-radius: 50%;
+      border: 1px solid red;
+      background-color: #fff;
+    }
+
+    .item {
+      position: absolute;
+      left: 50%;
+      height: 250.1234208092861px;
+      width: 15.705379539064147px;
+      transform-origin: 50% 100%;
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress">
+
+  </div>
+  <script>
+
+    class Progress {
+      constructor({ dom, ratio }) {
+        this.dom = dom || document.body;
+        this.ratio = ratio || 0;
+        this.create();
+      }
+
+      create() {
+        this.outCircleDom = document.createElement('div');
+        this.outCircleDom.classList.add('out-circle');
+        this.innerCircleDom = document.createElement('div');
+        this.innerCircleDom.classList.add('inner-circle');
+        this.outCircleDom.appendChild(this.innerCircleDom);
+        this.dom.appendChild(this.outCircleDom);
+        this.render(this.ratio)
+      }
+
+      onChange(ratio) {
+        this.render(ratio)
+      }
+
+      renderRatio(ratio) {
+        if (ratio > 1 || ratio < 0) {
+          throw Error('ratio may be great than 0 and less than 1')
+        }
+        this.innerCircleDom.textContent = parseInt(100 * ratio) + '%';
+      }
+
+      renderItems(ratio) {
+        this.itemCount = parseInt(100 * ratio);
+        var domFrag = document.createDocumentFragment();
+        for (let i = 0; i < this.itemCount; i++) {
+          var item = document.createElement('div');
+          item.classList.add('item')
+          item.style.cssText = `transform: translateX(-50%) rotate(${3.6 * i}deg);`
+          domFrag.appendChild(item)
+        }
+        this.outCircleDom.appendChild(domFrag)
+      }
+
+      render(ratio) {
+        this.renderItems(ratio)
+        this.renderRatio(ratio)
+      }
+    }
+
+    let progress = new Progress({
+      dom: document.querySelector('.progress'),
+      ratio: 0
+    });
+
+
+    let r = 0
+    document.body.onclick = e => {
+      progress.onChange(r+=0.01)
+    }
+  </script>
+</body>
+
+</html>
