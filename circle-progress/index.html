@@ -87,16 +87,16 @@
         var domFrag = document.createDocumentFragment();
         for (let i = 0; i < this.itemCount; i++) {
           var item = document.createElement('div');
-          item.classList.add('item')
-          item.style.cssText = `transform: translateX(-50%) rotate(${3.6 * i}deg);`
-          domFrag.appendChild(item)
+          item.classList.add('item');
+          item.style.cssText = `transform: translateX(-50%) rotate(${3.6 * i}deg);`;
+          domFrag.appendChild(item);
         }
-        this.outCircleDom.appendChild(domFrag)
+        this.outCircleDom.appendChild(domFrag);
       }
 
       render(ratio) {
-        this.renderItems(ratio)
-        this.renderRatio(ratio)
+        this.renderItems(ratio);
+        this.renderRatio(ratio);
       }
     }
 
@@ -106,10 +106,10 @@
     });
 
 
-    let r = 0
+    let r = 0;
     document.body.onclick = e => {
-      progress.onChange(r+=0.01)
-    }
+      progress.onChange(r += 0.01)
+    };
   </script>
 </body>
 
